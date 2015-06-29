@@ -20,3 +20,5 @@ Sensor utilization - Inbuilt Bluetooth, Buzzer, LED
 Software components - Android Studio for Developing Android Application, Arduino IDE, Python Script 
 Hardware components - Intel Edison, Wallet & Sensors
 The Dev Kit - Intel Edison Development Kit.
+
+This project is available on instructables. Please visit the link below: http://www.instructables.com/id/DigiWallet-Your-Smart-Wallet/
