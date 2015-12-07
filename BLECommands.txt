@@ -1,0 +1,10 @@
+rfkill block bluetooth
+rfkill unblock bluetooth
+bluetoothctl
+show
+scan on
+discoverable on
+pair 98:4F:EE:01:FD:D6
+trust 98:4F:EE:01:FD:D6
+scan off
+connect 98:4F:EE:01:FD:D6

@@ -1,0 +1,117 @@
+Intro
+
+How it works
+
+Requirements
+
+Connection & Setup
+Getting up Edison board
+Bluetooth configuration - commands
+
+Scan
+Discovery
+Pair
+Connect
+---------------------------------------------------
+DigiWallet - Your Smart Wallet
+Ever misplaced your wallet? Or Lost your Wallet? Have a habit of forgetting it behind? Now don’t worry about losing or misplacing your wallet, coz we have come up with an idea to make your ordinary wallet SMART using Intel Edison.
+
+Description:
+1.Pair your wallet with your smart phone, using Bluetooth.
+2.Get notification on your phone if your wallet is out of range.
+3.Locate your wallet from your smartphone app by pressing the locate button. This will trigger the buzzer on the wallet.
+This prototype was built during Intel® IoT Roadshow Bangalore, Bangalore, India in April 2015. Intel provided us with both an Edison development board and a Grove Starter Kit Plus, Intel IoT Edition.
+
+
+---------------------------------------------------
+How it Works?
+1. Setup an ordinary wallet with the Intel Edison Board, connected with a Buzzer and Led module.
+
+2. DigiWallet Mobile App will do the Bluetooth pairing with Intel Edison board. Now the Smartphone and DigiWallet will be in constant connection.
+
+3. If the wallet is out of the Bluetooth range, the DigiWallet app will send an alert to the user, that it has been lost.
+
+4. If the wallet is misplaced within the range, the user can use Locate feature to trigger the buzzer alarm and led on the DigiWallet.
+
+5. If phone is misplaced within the range then using hardware button user can locate phone (which makes some sound/LED blowup on receiving signal from wallet)
+
+---------------------------------------------------
+Required Components
+
+1. Intel Edison
+
+2. Arduino Extension Board
+
+3. Grove LED
+
+4. Grove Buzzer Sensor
+
+5. Software components - Android Studio for Developing Android Application, Arduino IDE, Python Script
+6. An ordinary Wallet
+
+7. Android smartphone
+----------------------------------------------------
+Connection & Circuit Setup
+
+Before starting you need to setup computer with Intel Edison & configure Ethernet over USB. ​If you attend an Intel hackathon they will walk you through setting up and testing your Intel Edison. If you are doing this on your own you will find instructions on their ​IoT website.
+
+Once you have your Edison up and running you should remove the Grove base shield from the Starter Kit and place it on your Edison board.
+
+Next attach the Grove sensors to the board as follows:
+
+​Grove LED to Pin 12
+Grove Buzzer to socket D6
+Screw up the hinges in the 4 corners (as shown in the image) and keep it over the Wallet. This completes the connection & circuit setup.
+
+----------------------------------------------------
+Upgrading your firmware
+
+​During the hackathon we came to know that inbuilt bluetooth in edison does not work in versions prior to 120. To get it working, we had to upgrade the firmware. Please check your firmware version as instructed below: 
+
+- Connect to edison using Serial COM Port in putty, use the instruction 'configure_edison --version' if the version is less than 120, upgrade your firmware.
+
+We updated to edison-image-ww05-15. Please follow the attached guide to update the firmware of Intel Edison. 
+
+----------------------------------------------------
+Bluetooth configuration & commands
+
+​We used Intel Edison's inbuilt bluetooth 4.0.
+There are 4 activities in bluetooth configuration : 
+
+Scan
+Discovery 
+Pair 
+Connect
+
+Establish connection with android device:
+Login to edison using Serial COM Port @ speed 115200 through putty
+Unblock bluetooth 'rfkill unblock bluetooth'
+Log into bluetooth controller utility 'bluetoothctl'
+View the configurations 'show'
+Scan the devices 'scan on'
+Make your edison discoverable 'discoverable on'
+Pair the device which you need to connect using unique bluetooth id 'pair 98:4F:EE:01:FD:D6'
+Connect to the paired device 'connect 98:4F:EE:01:FD:D6'
+
+----------------------------------------------------
+Loopback python Script
+​For Activating the detection alarm, we need to write a python script which will run as a service or background thread on the Intel Edison board.
+
+Login into the Edison using Serial COM Port in putty for this task.
+Create a python file in edison /home/root & write the code or copy the attached python script at this location.
+Before running the loopback.py script, notice that the bluetoothctl utility does not display the serial profile
+Then execute this script using command 'python ./loopback.py -C 22'Check whether the script is running in the processes using 'top' command.
+After you run the loopback.py script on your Intel Edison device, the serial port does display(see the screenshots)
+
+----------------------------------------------------
+Testing & Screenshots
+Install the bundled android application to android device. Launch the app & connect to Edison.
+​
+Take the device beyond the bluetooth range of edison, ​you will receive an Alert in your device's notification bar saying "Your wallet seems to be out of reach!! Please check your surroundings"
+​
+When you come back in the bluetooth range, you will get the notification saying "Your wallet connected to your device!"
+​
+Once you are in the range and you misplace the wallet, you can locate the wallet by pressing the locate button. This will trigger the buzzer & led on the wallet through loopback.py.
+----------------------------------------------------
+Mission Accomplished!
+This concluded our hack. End of the day, our project got selected in Top 15 projects at Intel IoT Roadshow.
